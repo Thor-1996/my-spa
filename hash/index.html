@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>hash 模式</title>
+  </head>
+  <body>
+    <a href="#1">查看第1个页面</a>
+    <a href="#2">查看第2个页面</a>
+    <a href="#3">查看第3个页面</a>
+    <a href="#4">查看第4个页面</a>
+
+    <div id="app"></div>
+
+    <script>
+      const app = document.querySelector("#app");
+
+      const div1 = document.createElement("div");
+      div1.innerHTML = "我是第1个页面的内容";
+
+      const div2 = document.createElement("div");
+      div2.innerHTML = "我是第2个页面的内容";
+
+      const div3 = document.createElement("div");
+      div3.innerHTML = "我是第3个页面的内容";
+
+      const div4 = document.createElement("div");
+      div4.innerHTML = "我是第4个页面的内容";
+
+      const div404 = document.createElement("div");
+      div404.innerHTML = "您输入的页面不存在";
+
+      const routeTable = {
+        1: div1,
+        2: div2,
+        3: div3,
+        4: div4,
+      };
+      window.addEventListener("hashchange", () => {
+        const hash = window.location.hash.substr(1) || "1";
+        let div = routeTable[hash];
+
+        if (!div) {
+          div = div404;
+        }
+
+        app.innerHTML = "";
+        app.appendChild(div);
+      });
+    </script>
+  </body>
+</html>
